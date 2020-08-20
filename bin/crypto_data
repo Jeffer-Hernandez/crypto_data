@@ -1,4 +1,5 @@
 #!/usr/bin/env ruby
-require '../lib/crypto_data'
+require_relative '../lib/crypto_data.rb'
 
+CryptoData::GetCurrency.new.fetch_data
 CryptoData::CLI.new.call
