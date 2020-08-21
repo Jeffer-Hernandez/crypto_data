@@ -6,7 +6,7 @@ class CryptoData::CLI
     include CryptoData
 
     def call
-        puts "Welcome"
+        puts "Welcome to Crypto Data!"
        
         print_menu(@input)
         print_info(@input)

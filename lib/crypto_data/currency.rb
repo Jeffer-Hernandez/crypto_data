@@ -3,67 +3,53 @@
 # WE ARE JUST SAVING INFORMATION IN THIS CLASS
 
 class CryptoData::Currency
+    include CryptoData
 
-#     attr_accessor :pair, :price, :high, :low, :volume
+   attr_accessor :asset_id, :asset_info
 
-#     @@all = []
+    @@all = []
 
-#     def initialize (pair= nil, price = nil, high = nil, low = nil, volume = nil)
+    def initialize(attrs)
+        set_int_id
+        attrs_from_hash(attrs)
+        save
+    end
 
-#         @price = price
-#         @pair = pair
-#         @high = high
-#         @low = low
-#         @volume = volume
-#         @@all << self
+    def set_int_id 
+        @int_id = @@all.length + 1
+    end
 
-#         # asset_id	Our asset identifier. Superset of the ISO 4217 currency codes standard.
-#         # name	Display name of the asset.
-#         # type_is_crypto	Boolean value transported as integer; 1 for cryptocurrency assets, 0 otherwise.
-#         # data_quote_start	The date and time of first quote.
-#         # data_quote_end	The date and time for last quote.
-#         # data_orderbook_start	The date and time for first order book.
-#         # data_orderbook_end	The date and time for last order book.
-#         # data_trade_start	The date and time for first trade.
-#         # data_trade_end	The date and time for last trade.
-#         # data_quote_count	The count of quotes.
-#         # data_trade_count	The count of trades.
-#         # data_symbols_count	The count of symbols for given asset.
-#         # volume_1hrs_usd	The usd volume sum within 1 hour for all the symbols.
-#         # volume_1day_usd	The usd volume sum within 1 day for all the symbols.
-#         # volume_1mth_usd	The usd volume sum within 1 month for all the symbols.
-#         # price_usd	The actual usd price.
+    def attrs_from_hash(attrs)
+        attrs.each do |k, v|
+            binding.pry
+            send("#{k}=", v)
+        end
+    end
 
-#     end
+    def save 
+        @@all << self
+    end
 
-#     def all
-#         @@all
-#     end
+    def self.get_tickers
+        CryptoData::GetCurrency.get_tickers
+        all
+    end
 
-#     def self.find(id)
-#         self.all[id-1]
-#     end
+    def self.new_from_collection(tickers)
+        tickers.each do |attrs|
+            new(attrs)
+        end 
+    end
 
-#     def price
-#         @price
-#     end
+    def self.all
+        get_tickers if @@all == []
+        @@all
+        binding.pry
+    end
 
-#     def pair
-#         @pair
-#     end
+    def self.find_by_id(input)
+        all.find{|s| s.int_id == input.to_i}
+      
+    end
 
-#     def high
-#         @high
-#     end
-
-#     def low
-#         @low
-#     end
-
-#     def volume
-#         @volume
-#     end
-
-
-
- end
+end

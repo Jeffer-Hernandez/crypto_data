@@ -23,9 +23,9 @@ class CryptoData::GetCurrency
         # all api data is below in response.body. now being returned by fetch_data
         data = response.body
         ticker = JSON.parse(data)
-        ticker.collect do |currency|
-            currency["asset_id"]
-            binding.pry
+        ticker.collect do |tickers|
+            tickers["asset_id"]
+            CryptoData::Currency.new_from_collection(tickers)
         end
         
     end
