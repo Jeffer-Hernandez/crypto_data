@@ -55,7 +55,7 @@ class CryptoData::Currency
         end
         CryptoData::CLI.new.call(finished_array)
     end
-
+    # recreate this^^^^^ for all 10 currencies on the menu
     
 
     def save
