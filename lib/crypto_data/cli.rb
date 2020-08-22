@@ -5,12 +5,19 @@
 class CryptoData::CLI
     include CryptoData
 
-    def call
+    attr_accessor :finished_array
+
+    def call(finished_array)
+        finished_array
+
+        
+        
         puts "Welcome to Crypto Data!"
        
-        print_menu(@input)
-        print_info(@input)
+        print_menu(@input,finished_array)
+        print_info(@input,finished_array)
         start
+        
         
     end
 
@@ -32,7 +39,7 @@ class CryptoData::CLI
         end
     end
 
-    def print_menu(input)
+    def print_menu(input, finished_array)
         
         # puts the menu.. menu will consist of the different cryptocurrency pairs available in the api info as a numbered list
         # ex. btcusd, btceth, btcltc, ethusd
@@ -49,36 +56,43 @@ class CryptoData::CLI
         puts "8.  CHF"
         puts "9.  SEK"
         puts "10. GBP"
+  
 
         @input = gets.strip.to_i-1
-        print_info(@input)
+        print_info(@input,finished_array)
         
     end
 
-    def print_info(input)
+    def print_info(input,finished_array)
 
         # psuedo code, have not named variables because i have not extracted infor from API yet.
         # puts "Which number currency would you like info about?"
         # @input = gets.strip.to_i
 
         if @input == 0
+
+            finished_array.each do |line| 
+                puts "#{line}"
+            end
             
-            puts "asset_id: #{CryptoData::Currency.btc.asset_id}"
-            puts "name: #{CryptoData::Currency.btc.name}"
-            puts "type_is_crypto: #{CryptoData::Currency.btc.type_is_crypto}"
-            puts "data_start: #{CryptoData::Currency.btc.data_start}"
-            puts "data_end: #{CryptoData::Currency.btc.data_end}"
-            puts "data_quote_start: #{CryptoData::Currency.btc.data_quote_start}"
-            puts "data_quote_end: #{CryptoData::Currency.btc.data_quote_end}"
-            puts "data_orderbook_start: #{CryptoData::Currency.btc.data_orderbook_start}"
-            puts "data_orderbook_end: #{CryptoData::Currency.btc.data_orderbook_end}"
-            puts "data_trade_start: #{CryptoData::Currency.btc.data_trade_start}"
-            puts "data_trade_end: #{CryptoData::Currency.btc.data_trade_end}"
-            puts "data_symbols_count: #{CryptoData::Currency.btc.data_symbols_count}"
-            puts "volume_1hrs_usd: #{CryptoData::Currency.btc.volume_1hrs_usd}"
-            puts "volume_1day_usd: #{CryptoData::Currency.btc.volume_1day_usd}"
-            puts "volume_1mth_usd: #{CryptoData::Currency.btc.volume_1mth_usd}"
-            puts "id_icon: #{CryptoData::Currency.btc.id_icon}"
+            
+            
+            # puts "asset_id: #{CryptoData::Currency.btc}"
+            # puts "name: #{CryptoData::Currency.btc.name}"
+            # puts "type_is_crypto: #{CryptoData::Currency.btc.type_is_crypto}"
+            # puts "data_start: #{CryptoData::Currency.btc.data_start}"
+            # puts "data_end: #{CryptoData::Currency.btc.data_end}"
+            # puts "data_quote_start: #{CryptoData::Currency.btc.data_quote_start}"
+            # puts "data_quote_end: #{CryptoData::Currency.btc.data_quote_end}"
+            # puts "data_orderbook_start: #{CryptoData::Currency.btc.data_orderbook_start}"
+            # puts "data_orderbook_end: #{CryptoData::Currency.btc.data_orderbook_end}"
+            # puts "data_trade_start: #{CryptoData::Currency.btc.data_trade_start}"
+            # puts "data_trade_end: #{CryptoData::Currency.btc.data_trade_end}"
+            # puts "data_symbols_count: #{CryptoData::Currency.btc.data_symbols_count}"
+            # puts "volume_1hrs_usd: #{CryptoData::Currency.btc.volume_1hrs_usd}"
+            # puts "volume_1day_usd: #{CryptoData::Currency.btc.volume_1day_usd}"
+            # puts "volume_1mth_usd: #{CryptoData::Currency.btc.volume_1mth_usd}"
+            # puts "id_icon: #{CryptoData::Currency.btc.id_icon}"
             
             start
 
