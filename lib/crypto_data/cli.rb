@@ -10,7 +10,7 @@ class CryptoData::CLI
         @ticker_menu
         @rate
     
-        puts "Welcome to Bitcoin Exchange!"
+        puts "Welcome to Bitcoin Exchange! Where you can find the price of a Bitcoin in any currency."
         print_menu(ticker_menu, rate)
         start
     end
