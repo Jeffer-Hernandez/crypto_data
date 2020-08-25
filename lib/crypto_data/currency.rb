@@ -5,33 +5,53 @@
 class CryptoData::Currency
     include CryptoData
 
-    attr_accessor :ticker_symbol, :rate
+    attr_accessor :int_id, :time, :asset_id_quote, :rate
+
+    # Currency is being passed 2 arrays and those are the attributes of the Currency class
+    # we aren't dealing with individual currency objects, or instances OF the Currency class
 
     @@all = []
 
-    def initialize(ticker_symbol, rate)
-        @ticker_symbol
-        @rate        
-        
-       set_ticker_int_id(ticker_symbol, rate)
-       
-        
+  
+    def initialize(currency)
+        set_int_id
+        attrs_from_hash(currency)
+        @@all << self
     end
 
-    def set_ticker_int_id(ticker_symbol, rate) 
-        ticker_menu = []
-        ticker_symbol.each.with_index do |symbol, i|
-          ticker_menu <<  "#{i+1}. #{symbol}"
-          
+    def attrs_from_hash(currency)
+        currency.each do |line|
+            line.each do |k, v|
+                send("#{k}=", v)
+            end
         end
-        CryptoData::CLI.new(ticker_menu, rate)
         
+    end
+    
+
+
+    def set_int_id 
+        @int_id = @@all.length + 1
     end
 
     
-
+    def self.fetch_data
+        CryptoData::GetCurrency.new.fetch_data
+        all
+        
+    end
     
-
+    def self.all
+        fetch_data if @@all == []
+        @@all
+        # binding.pry
+    end
     
+    
+    
+    def self.find_by_id(input)
+        all.find{|s| s.int_id == input.to_i}
+    end           
+
 end
 

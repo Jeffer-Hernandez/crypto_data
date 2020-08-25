@@ -2,5 +2,5 @@
 require_relative '../lib/crypto_data.rb'
 
 
-CryptoData::GetCurrency.new.fetch_data
-# CryptoData::CLI.new(ticker_menu, rate)
+# CryptoData::GetCurrency.new.fetch_data
+CryptoData::CLI.new.call
