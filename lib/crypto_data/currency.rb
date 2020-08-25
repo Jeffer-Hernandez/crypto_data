@@ -2,13 +2,16 @@
 # to puts specific phrases using these variables that has stored information from the database
 # WE ARE JUST SAVING INFORMATION IN THIS CLASS
 
+# Currency is being passed 2 arrays and those are the attributes of the Currency class
+# we aren't dealing with individual currency objects, or instances OF the Currency class
+# Dalia's advice ^^^
+
 class CryptoData::Currency
     include CryptoData
 
     attr_accessor :int_id, :time, :asset_id_quote, :rate
 
-    # Currency is being passed 2 arrays and those are the attributes of the Currency class
-    # we aren't dealing with individual currency objects, or instances OF the Currency class
+    
 
     @@all = []
 

@@ -22,7 +22,7 @@ class CryptoData::GetCurrency
         data = response.read_body
 
         ticker = JSON.parse(data)
-        
+        # binding.pry
         keys= []
         values=[]
         attrs = []

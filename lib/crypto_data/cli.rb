@@ -8,7 +8,7 @@ class CryptoData::CLI
     def call 
         puts "Welcome! Please enter the number currency for which you would like to know the Bitcoin exchange rate: "
         print_menu
-        validate(input)
+        validate
         start
     end
 
@@ -18,7 +18,7 @@ class CryptoData::CLI
         sec_input = gets.strip.downcase
         if sec_input == "y"
         print_menu
-        validate(input)
+        validate
         start
         elsif sec_input == "n"
         puts ""
@@ -39,17 +39,19 @@ class CryptoData::CLI
         
     end
 
-    def validate(input)
-        currency = CryptoData::Currency.find_by_id(input)
-        currency ? show_cur(input): invalid_input
+    def validate
+        @input = gets.strip.to_i
+        currency = CryptoData::Currency.find_by_id(@input)
+        currency ? show_cur(currency): invalid_input
         # binding.pry
+        # may not need to insert "currency" as argument in show_cur
     end 
 
-    def show_cur(input)
+    def show_cur(currency)
         # find a way to show the corresponding asset object attribute in brackets
-        puts "Asset ID: #{asset_id_quote}"
-        puts "Time of request: #{time}"
-        puts "Rate of asset in Bitcoin: #{rate}"
+        puts "Asset ID: #{currency.asset_id_quote}"
+        puts "Time of request: #{currency.time}"
+        puts "Rate of asset in Bitcoin: #{currency.rate}"
 
     end 
 
