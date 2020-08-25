@@ -28,8 +28,6 @@ class CryptoData::Currency
         
     end
     
-
-
     def set_int_id 
         @int_id = @@all.length + 1
     end
@@ -50,7 +48,8 @@ class CryptoData::Currency
     
     
     def self.find_by_id(input)
-        all.find{|s| s.int_id == input.to_i}
+        all.find {|s| s.int_id == input.to_i}
+        # binding.pry
     end           
 
 end

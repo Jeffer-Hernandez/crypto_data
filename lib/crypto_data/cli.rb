@@ -8,31 +8,17 @@ class CryptoData::CLI
     def call 
         puts "Welcome! Please enter the number currency for which you would like to know the Bitcoin exchange rate: "
         print_menu
-        
         validate(input)
         start
     end
 
-
-    # def initialize(ticker_menu, rate)
-
-    #     @ticker_menu
-    #     @rate
-    
-    #     puts "Welcome to Bitcoin Exchange! Where you can find the price of a Bitcoin in any currency."
-    #     print_menu(ticker_menu, rate)
-    #     start
-    # end
-
     def start
-        # puts ""
-        # puts "Would you like to see another pair? Enter Y or N"
-        
-        puts "Would you like to see another pair?"
+        puts ""
+        puts "Would you like to see another pair? Please answer Y or N: "
         sec_input = gets.strip.downcase
         if sec_input == "y"
         print_menu
-        validate
+        validate(input)
         start
         elsif sec_input == "n"
         puts ""
@@ -45,8 +31,6 @@ class CryptoData::CLI
         end
     end
 
-
-
     def print_menu
         CryptoData::Currency.all.each do |cur|
             puts "#{cur.int_id}. #{cur.asset_id_quote}"
@@ -58,19 +42,16 @@ class CryptoData::CLI
     def validate(input)
         currency = CryptoData::Currency.find_by_id(input)
         currency ? show_cur(input): invalid_input
-        binding.pry
+        # binding.pry
     end 
 
     def show_cur(input)
-        # binding.pry
-        
-        
-            
-        
-        # currency["asset_id_quote"].each{|li| puts li}
-    end 
+        # find a way to show the corresponding asset object attribute in brackets
+        puts "Asset ID: #{asset_id_quote}"
+        puts "Time of request: #{time}"
+        puts "Rate of asset in Bitcoin: #{rate}"
 
-    
+    end 
 
     def invalid_input
         puts "I dont understand that input, please try again!"
@@ -81,9 +62,3 @@ class CryptoData::CLI
    
 
 end
-
-    # def print_info(input,rate)
-    #     puts "You would pay #{rate[input]} in that currency for 1 Bitcoin."
-
-    #     start
-    # end

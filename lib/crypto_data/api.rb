@@ -25,20 +25,12 @@ class CryptoData::GetCurrency
         
         keys= []
         values=[]
-        ticker_symbol = []
-        rate = []
-
-        # ticker.each do |key, val| 
-        #     keys<< key
-        #     values << val
-        #     binding.pry
-        # end
         attrs = []
         currencies = []
+
         ticker.each do|key, val|
             keys << key
-            values << val
-            
+            values << val 
         end
 
         # binding.pry
@@ -52,39 +44,7 @@ class CryptoData::GetCurrency
             CryptoData::Currency.new(currencies)
         end
        
-        # time = []
-        # rate = []
-        # asset_id = []
-
-        # currencies.each do |cur|
-        #     time << cur["time"]
-        #     asset_id << cur["asset_id_quote"]
-        #     rate << cur["rate"]
-            
         
-        
-        
-        
-
-        
-        # CryptoData::Currency.new_from_collection(currencies)
-        
-      
-        # binding.pry
-
-
-        # binding.pry
-        # values[1].each do |line|
-        #     ticker_symbol << line["asset_id_quote"]
-      
-        # end
-
-        # values[1].each do |line|
-        #     rate << line["rate"]
-            
-        # end
-
-        # CryptoData::Currency.new(ticker_symbol, rate)
         
     end
 end
